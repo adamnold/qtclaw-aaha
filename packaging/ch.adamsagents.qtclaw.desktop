@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=QtClaw-aaha
+Comment=OpenClaw Gateway desktop wrapper
+Exec=qtclaw-aaha
+Icon=ch.adamsagents.qtclaw
+Terminal=false
+Categories=Network;InstantMessaging;
+StartupNotify=true
+StartupWMClass=qtclaw-aaha

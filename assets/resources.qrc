@@ -1,0 +1,12 @@
+<RCC><qresource prefix="/">
+  <file>bridge/main.js</file><file>bridge/isolated.js</file>
+  <file>icons/16/ch.adamsagents.qtclaw.png</file>
+  <file>icons/22/ch.adamsagents.qtclaw.png</file>
+  <file>icons/24/ch.adamsagents.qtclaw.png</file>
+  <file>icons/32/ch.adamsagents.qtclaw.png</file>
+  <file>icons/48/ch.adamsagents.qtclaw.png</file>
+  <file>icons/64/ch.adamsagents.qtclaw.png</file>
+  <file>icons/128/ch.adamsagents.qtclaw.png</file>
+  <file>icons/256/ch.adamsagents.qtclaw.png</file>
+  <file>icons/512/ch.adamsagents.qtclaw.png</file>
+</qresource></RCC>

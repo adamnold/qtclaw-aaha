@@ -1,0 +1,38 @@
+cmake_minimum_required(VERSION 3.24)
+project(QtClawAAHA VERSION 0.1.0 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+include(GNUInstallDirs)
+find_package(Qt6 6.10 REQUIRED COMPONENTS Core Gui Widgets Network DBus WebEngineWidgets WebChannel)
+add_library(qtclaw_core STATIC
+    src/policy.cpp src/config.cpp src/notifications.cpp src/browser.cpp
+    src/instance.cpp src/window.cpp assets/resources.qrc)
+target_include_directories(qtclaw_core PUBLIC src)
+target_link_libraries(qtclaw_core PUBLIC Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Network
+    Qt6::DBus Qt6::WebEngineWidgets Qt6::WebChannel)
+target_compile_definitions(qtclaw_core PUBLIC QTCLAW_VERSION="${PROJECT_VERSION}-beta")
+target_compile_options(qtclaw_core PRIVATE -Wall -Wextra -Wpedantic)
+add_executable(qtclaw-aaha src/main.cpp)
+target_link_libraries(qtclaw-aaha PRIVATE qtclaw_core)
+install(TARGETS qtclaw-aaha RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(FILES packaging/ch.adamsagents.qtclaw.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+foreach(icon_size IN ITEMS 16 22 24 32 48 64 128 256 512)
+    install(FILES assets/icons/${icon_size}/ch.adamsagents.qtclaw.png
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/${icon_size}x${icon_size}/apps)
+endforeach()
+install(FILES packaging/ch.adamsagents.qtclaw.metainfo.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
+install(FILES LICENSE THIRD_PARTY_NOTICES.md assets/ICON.md DESTINATION ${CMAKE_INSTALL_DATADIR}/licenses/qtclaw-aaha)
+install(FILES README.md docs/ACCEPTANCE.md docs/ARCHITECTURE.md docs/PACKAGING.md docs/VALIDATION.md
+    DESTINATION ${CMAKE_INSTALL_DOCDIR})
+include(CTest)
+if(BUILD_TESTING)
+    find_package(Qt6 REQUIRED COMPONENTS Test)
+    add_executable(qtclaw_tests tests/tests.cpp)
+    target_link_libraries(qtclaw_tests PRIVATE qtclaw_core Qt6::Test)
+    target_compile_options(qtclaw_tests PRIVATE -Wall -Wextra -Wpedantic)
+    add_test(NAME qtclaw_tests COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tests/run-tests.sh $<TARGET_FILE:qtclaw_tests>)
+    set_tests_properties(qtclaw_tests PROPERTIES TIMEOUT 150
+        ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QTWEBENGINE_CHROMIUM_FLAGS=--disable-gpu;QT_LOGGING_RULES=qt.qpa.*=false")
+endif()

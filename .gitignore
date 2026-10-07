@@ -1,0 +1,6 @@
+/build/
+/dist/
+*.user
+*.rpm
+*.log
+__pycache__/
