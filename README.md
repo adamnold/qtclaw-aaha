@@ -2,6 +2,8 @@
 
 A small C++/Qt desktop wrapper for your existing OpenClaw Gateway. Initial beta target: Fedora 44 KDE, x86-64, Wayland. QtClaw-aaha uses Fedora's shared Qt WebEngine and leaves the live OpenClaw interface intact.
 
+Project: [GitHub repository](https://github.com/adamnold/qtclaw-aaha). Downloads: [beta releases](https://github.com/adamnold/qtclaw-aaha/releases).
+
 ## What it does
 
 - Multiple named servers with separate persistent browser profiles, cookies, storage, and site permissions.

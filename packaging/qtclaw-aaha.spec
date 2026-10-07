@@ -6,6 +6,7 @@ Version:        0.1.0
 Release:        0.1.beta%{?dist}
 Summary:        Fedora desktop wrapper for OpenClaw Gateways
 License:        MIT
+URL:            https://github.com/adamnold/qtclaw-aaha
 Source0:        %{name}-%{version}.tar.gz
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
